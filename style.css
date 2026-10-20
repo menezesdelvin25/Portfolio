@@ -1,14 +1,12 @@
 
 :root {
   --primary-color: #3498db;
-  --bg-color: #f4f7f6;
-  --text-color: #333;
+  --text-color: #black;
   --section-bg: #fff;
 }
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--bg-color);
   color: var(--text-color);
   margin: 0.5;
   padding: 0.5;
