@@ -3,167 +3,102 @@ const control_of_admin_btn = document.getElementById("admin-btn");
 const control_of_admin_login_section = document.getElementById("admin-login");
 const control_of_user_responses_section = document.getElementById("user-responses");
 
-control_of_admin_btn.addEventListener('click', function(){
-  control_of_admin_login_section.style.display = "block"; //from none to block.
-}
-);
-
-//Task toggle button work
+control_of_admin_btn.addEventListener('click', function(e) {
+  e.preventDefault(); // Prevents jumping to the top of the page
+  control_of_admin_login_section.style.display = "block"; 
+});
 
 const control_of_toggle_btn = document.getElementById("toggle-theme");
-
-control_of_toggle_btn.addEventListener('click', function(){
+control_of_toggle_btn.addEventListener('click', function() {
   document.body.classList.toggle("dark-theme");
 });
 
-const db_url = "https://script.google.com/macros/s/AKfycbzwUGvnyL4SffbETlwyiisLtm1l-scNnuPaKhGoBg3Yuws5Cw6tz8l2dqSk6DwBuyvF/exec" //Our API
-
-
-//Task 3 - Capture info from the contact me form.
+const db_url = "https://script.google.com/macros/s/AKfycbz4pvSqdRvi7JJi0DMppNrqRFnY7kC0VFkYnEFdgFynnWM24maCv2JHgcMsBrY3Oo7LBA/exec";
 
 const control_of_contact_form = document.getElementById("contact-form");
+control_of_contact_form.addEventListener("submit", async function(event) {
+  event.preventDefault(); // CRITICAL: prevents page reload
 
-control_of_contact_form.addEventListener("submit", async function(event){
   let name = document.getElementById("input-name").value;
   let email = document.getElementById("input-email").value;
   let msg = document.getElementById("input-msg").value;
-  //let date = new Date().toLocaleString();
 
-try {
-  let response = await fetch (
-    db_url, 
-    {
+  try {
+    let response = await fetch(db_url, {
       method: "POST",
-      headers: {
-        "Content-Type":
-          "text/plain;charset=utf-8"
-      },
-      body: JSON.stringify({ 
-        action: "save_message",
-        name: name,
-        email: email,
-        msg: msg
-      })
-        
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ action: "save_message", name, email, msg })
+    });
+    
+    let result = await response.json();
+    if (result.success) {
+      alert("Message submitted, will get back to you shortly!");
+      control_of_contact_form.reset(); // Clear form after success
+    } else {
+      alert("Message could not be saved!");
     }
-  );
-  
-  let result = await response.json();
-  if (result.success) {
-    alert("Message submitted, will get back to you shortly!");
-  }
-  else{
-    alert("Message could not be saved!");
-  }
-}
-  catch(error){
+  } catch(error) {
     console.error(error);
     alert("There was a problem submitting the message!");
   }
 });
 
-//Task - making the admin login section work
 let control_of_admin_form = document.getElementById("admin-form");
+control_of_admin_form.addEventListener("submit", async function(event) {
+  event.preventDefault(); // CRITICAL: prevents page reload
 
-control_of_admin_form.addEventListener("submit", async function(event){
   let username = document.getElementById("input-username").value;
   let password = document.getElementById("input-password").value;
   
-try {
-  let response = await fetch (
-    db_url, 
-    {
+  try {
+    let response = await fetch(db_url, {
       method: "POST",
-      headers: {
-        "Content-Type":
-          "text/plain;charset=utf-8"
-      },
-      body: JSON.stringify({ 
-        action: "login",
-        username: username,
-        password: password
-      })
-        
-    }
-  );
-
-  let result = await response.json();
-  if (result.success) {
-    alert("Login Successful!");
-
-    //Admin section should disappear and User responses section should come up!
-    control_of_admin_login_section.style.display = "none"; //Makes it invisible
-    control_of_user_responses_section.style.display = "block"; //makes it visible
-    
-    //CALL the getUserMessages function here
-    getUserMessages();
-  }
-  else{
-    alert("Access denied, please try again!");
-  }
-}
-  catch(error){
-    console.error(error);
-    alert("There was a problem loging in!");
-  }
-  
-}
-)
-
-async function getUserMessages() {
-  try{
-    let response = await fetch(
-      db_url
-    );
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ action: "login", username, password })
+    });
 
     let result = await response.json();
+    if (result.success) {
+      alert("Login Successful!");
+      control_of_admin_login_section.style.display = "none"; 
+      control_of_user_responses_section.style.display = "block"; 
+      getUserMessages();
+    } else {
+      alert("Access denied, please try again!");
+    }
+  } catch(error) {
+    console.error(error);
+    alert("There was a problem logging in!");
+  }
+});
 
-    if(!result.success){
+async function getUserMessages() {
+  try {
+    let response = await fetch(db_url);
+    let result = await response.json();
+
+    if(!result.success) {
       alert("Could not fetch the messages.");
-      return; //the function will not run further once a return is encountered.
+      return; 
     }
 
     const control_of_user_messages_div = document.getElementById("user-messages");
+    control_of_user_messages_div.innerHTML = ""; // Clear existing messages before appending
 
-    result.messages.forEach(
-      responses => {
-        let control_of_new_div = document.createElement("div");
+    result.messages.forEach(response => {
+      let control_of_new_div = document.createElement("div");
+      control_of_new_div.classList.add("section-item"); // Apply CSS styling to messages
 
-        let nameParagraph = document.createElement("p");
-        nameParagraph.textContent = "Name: " + responses.name;
-
-        let emailParagraph = document.createElement("p");
-        emailParagraph.textContent = "Email: " + responses.email;
-
-        let messageParagraph = document.createElement("p");
-        messageParagraph.textContent = "Message: " + responses.msg;
-
-        let dateParagraph = document.createElement("p");
-        dateParagraph.textContent = "Date: " + responses.date;
-
-        let separater = document.createElement("hr");
-
-        control_of_new_div.appendChild(nameParagraph);
-
-        control_of_new_div.appendChild(emailParagraph);
-
-        control_of_new_div.appendChild(messageParagraph);
-
-        control_of_new_div.appendChild(dateParagraph);
-
-        control_of_new_div.appendChild(separater);
-
-        control_of_user_messages_div.appendChild(control_of_new_div);
-
-        
-
-        
-      }
-    )
-  }
-
-  catch(error) {
+      control_of_new_div.innerHTML = `
+        <p><strong>Name:</strong> ${response.name}</p>
+        <p><strong>Email:</strong> ${response.email}</p>
+        <p><strong>Message:</strong> ${response.msg}</p>
+        <p><strong>Date:</strong> ${response.date}</p>
+      `;
+      control_of_user_messages_div.appendChild(control_of_new_div);
+    });
+  } catch(error) {
     console.error(error);
-    alert("There was a problem in fetching messages from DB!");
+    alert("There was a problem fetching messages from DB!");
   }
 }
