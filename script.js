@@ -13,7 +13,7 @@ control_of_toggle_btn.addEventListener('click', function() {
   document.body.classList.toggle("dark-theme");
 });
 
-const db_url = "https://script.google.com/macros/s/AKfycbz4pvSqdRvi7JJi0DMppNrqRFnY7kC0VFkYnEFdgFynnWM24maCv2JHgcMsBrY3Oo7LBA/exec";
+const db_url = "https://script.google.com/macros/s/AKfycby7Z3Wu7KYwYU_zmi4dibht9tAWmDIZRYIjBydcilTkJZLNyC39iP7U_xVo1VYyzdTk/exec";
 
 const control_of_contact_form = document.getElementById("contact-form");
 control_of_contact_form.addEventListener("submit", async function(event) {
