@@ -1,133 +1,107 @@
+
+    <!DOCTYPE html>
 <html lang="en">
   <head>
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-    
-    <title>Pen</title>
+    <title>Delvin Menezes - Portfolio</title>
   </head>
   <body>
 
-    <header> <!-- Container tag-->
-    <h1>Delvin Menezes</h1>
-    <p>Currently a Sec Year B.Tech Comp Engg student, aspiring for a career in software and finance.</p>
+    <header>
+      <h1>Delvin Menezes</h1>
+      <p>Currently a fourth-year B.Tech Computer Engineering student, aspiring for a career in software and finance.</p>
     </header>
 
-    <nav>  <!-- Container tag-->
-    <ul>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#interships">Work Exp./Internships</a></li>
-      <li><a href="#">Volunteering</a></li>
-      <!-- sections that you want to have in your portfolio-->
-
-      <!--Mandatory sections-->
-      <li><a href="#contact-me">Contact Me</a></li>
-      <li><a href="#admin-login" id="admin-btn">Admin Login</a></li>
-      
-    </ul>
+    <nav>
+      <ul>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#interships">Work Exp / Internships</a></li>
+        <li><a href="#volunteering">Volunteering</a></li>
+        <li><a href="#contact-me">Contact Me</a></li>
+        <li><a href="#admin-login" id="admin-btn">Admin Login</a></li>
+      </ul>
     </nav>
+    
     <button id="toggle-theme">Toggle Theme</button>
-    <section id="education" class="section-blocks"> <!--Container tag-->
-      
-    <h2>Education</h2>
-
     
-
-    <div class="section-item">
-    <h3>B.Tech Computer Engg</h3>
-    <p>SFIT, Mumbai</p>
-    <p>2025-2029</p>
-    </div>
-
-    <div class="section-item">
-    <h3>ISC Grade XI & XII</h3>
-    <p>Jamnabai Narsee School</p>
-    <p>2025</p>
-    </div>
-    <div class="section-item">
-    <h3>ISCE Grade X</h3>
-    <p>St Xavier's English Medium School, Vasai(West)</p>
-    <p>2023</p>
-    </div>
-    </section>
-
-    <section id="interships" class="section-blocks"> <!--Container tag-->
-    <h2>Work Exp/ Internships</h2>
-
-    
-
-    <div class="section-item">
-    <h3>Client Research- C. R. M. </h3>
-    <p>Easyrewardz</p>
-    <p>JULY-2024</p>
-    </div>
-
-    </section>
-    <section id="interships" class="section-blocks"> <!--Container tag-->
-    <h2>Volunteering</h2>
-
-    
-
-    <div class="section-item">
-    <h3>Raised Money via Crowd funding </h3>
-    <p>Raised Rs. 40000 to build a school in rural Maharashtra as part of a broader initiative taken by the School.</p>
-    <p>September-2023</p>
-    </div>
-
-    </section>
-    <!-- If you want to add more sections please add them and then continue with
-    Contact me and Admin login sections-->
-
-    <!--Contact Me section-->
-    <section id="contact-me" class="section-blocks">
-      <h2>Contact Me</h2>
-
-      <form id="contact-form"> <!--form validation-->
-        <div>
-        <label>Name:</label>
-        <input type="text" id="input-name" required> 
+    <main>
+      <section id="education" class="section-blocks">
+        <h2>Education</h2>
+        <div class="section-item">
+          <h3>B.Tech Computer Engg</h3>
+          <p>SFIT, Mumbai | 2025-2029</p>
         </div>
-
-        <div>
-        <label>Email:</label>
-        <input type="email" id="input-email" required>
+        <div class="section-item">
+          <h3>ISC Grade XI & XII</h3>
+          <p>Jamnabai Narsee School | 2025</p>
         </div>
-
-        <div>
-        <label>Message:</label>
-        <textarea id="input-msg" required></textarea>
+        <div class="section-item">
+          <h3>ISCE Grade X</h3>
+          <p>St Xavier's English Medium School, Vasai(West) | 2023</p>
         </div>
+      </section>
 
-        <button type="submit">Submit</button>
-        
-      </form>
-      
-    </section>
-
-    <section id="admin-login" class="section-blocks">
-      <h2>Admin Login</h2>
-      <form id="admin-form">
-        <div>
-        <label>Username:</label>
-        <input type="text" id="input-username" required> 
+      <section id="interships" class="section-blocks">
+        <h2>Work Exp / Internships</h2>
+        <div class="section-item">
+          <h3>Client Research - C.R.M.</h3>
+          <p>Easyrewardz | July 2024</p>
         </div>
+      </section>
 
-        <div>
-        <label>Password:</label>
-        <input type="password" id="input-password" required> 
+      <section id="volunteering" class="section-blocks">
+        <h2>Volunteering</h2>
+        <div class="section-item">
+          <h3>Crowdfunding Initiative</h3>
+          <p>Raised Rs. 40,000 to build a school in rural Maharashtra as part of a broader school initiative. | September 2023</p>
         </div>
+      </section>
 
-        <button>Submit</button>
-      </form>
-    </section>
+      <section id="contact-me" class="section-blocks">
+        <h2>Contact Me</h2>
+        <form id="contact-form">
+          <div class="form-group">
+            <label for="input-name">Name:</label>
+            <input type="text" id="input-name" required> 
+          </div>
+          <div class="form-group">
+            <label for="input-email">Email:</label>
+            <input type="email" id="input-email" required>
+          </div>
+          <div class="form-group">
+            <label for="input-msg">Message:</label>
+            <textarea id="input-msg" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn">Submit</button>
+        </form>
+      </section>
 
-    <section id="user-responses" class="section-blocks">
-      <h2>User Responses</h2>
-      
-      <div id="user-messages">
-        
-      </div>
-      
-    </section>
+      <section id="admin-login" class="section-blocks">
+        <h2>Admin Login</h2>
+        <form id="admin-form">
+          <div class="form-group">
+            <label for="input-username">Username:</label>
+            <input type="text" id="input-username" required> 
+          </div>
+          <div class="form-group">
+            <label for="input-password">Password:</label>
+            <input type="password" id="input-password" required> 
+          </div>
+          <button type="submit" class="btn">Submit</button>
+        </form>
+      </section>
+
+      <section id="user-responses" class="section-blocks">
+        <h2>User Responses</h2>
+        <div id="user-messages"></div>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
     
     <script src="./script.js"></script>
   </body>
